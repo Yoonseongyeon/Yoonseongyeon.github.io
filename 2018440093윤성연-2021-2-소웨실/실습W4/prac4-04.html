@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>셀렉터 만들기</title>
+<style>
+h3 {
+	color : brown; font-size: 2em;
+} 
+div strong {
+	color : red; 
+} 
+div > strong {
+	color : blue;
+}
+#center {
+	text-align : center;
+}
+.right {
+	text-align : right;
+}
+.indent {
+	text-indent : 3em;
+}
+body.main {
+	background : powderblue;
+}
+#center strong {
+	background : yellow;
+} 
+</style>
+</head>
+<body class="main">
+<h3 class="headline">클래스 셀렉터</h3>
+<hr>
+<div class="help">도움말</div> 
+<p class="help">!!경고 메시지</p>
+<p id="hot">뜨거운 태양</p>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<h1>AjAX</h1>
+<p>AJAX = Asynchronous JavaScript And XML.</p>
+
+<p>AJAX is not a programming language.</p>
+
+<p>AJAX just uses a combination of:</p>
+
+<h2>윤성연</h2>
+<disaster>호우주의보</disaster>

@@ -11,16 +11,18 @@
     
     <!-- naver map -->
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=xe0ahohhl3"></script>
+    
     <style>
         table,th,td {
-          border : 1px solid black;
-          border-collapse: collapse;
+        border : 1px solid black;
+        border-collapse: collapse;
         }
         th,td {
-          padding: 5px;
+        padding: 5px;
         }
     </style>
 </head>
+
 <body>
 <div id="map" style="width:100%;height:400px;"></div>
 <script>
@@ -81,7 +83,7 @@ function startDataLayer() {
             strokeOpacity: 0.4
         };
 
-        // 마우스 올라갔을 떄 스타일
+        // 클릭했을 때 스타일
         if (feature.getProperty('focus')) {
             styleOptions.fillOpacity = 0.6;
             styleOptions.fillColor = '#0f0';
@@ -115,29 +117,35 @@ function startDataLayer() {
     // };
     // xhr.send('');
 
-
+    var doPre = '' ; //이전에 클릭한 지역
     map.data.addListener('click', function(e) {
         var feature = e.feature;
 
         // 여기서 다른 선택된 지역 있는지 지워줘야 됩니당
         // 지워주는 방법은
         // map.data._features 를 foreach 하면서 focus 끄시면 됩니다.
-
-        if (feature.getProperty('focus') !== true) {
+    if (feature.getProperty('focus') !== true) {
             // document.getElementById("table").innerHTML = feature.getProperty('area1');
             queryParams += '&' + encodeURIComponent('location_name') + '=' + encodeURIComponent(feature.getProperty('area1')); /**/
             xhr.open('GET', url + queryParams);
+            feature.setProperty('focus', true);
             xhr.onreadystatechange = function () {
                 myFunction(this);
             };
             xhr.send('');
-            map.data.features.forEach(
-                function(feature){
-                    feature.setProperty('focus', false);
-                }
-            );
-            feature.setProperty('focus', true);
+            // 아래처럼 하는 방법은 도저히 모르겠다.. 
+            // map.data._features.forEach(
+            //     function(feature){
+            //         feature.setProperty('focus', false);
+            //     }
+            // );
 
+            // 이전에 선택한 지역이 있었으면 focus를 끈다.
+     	    if ( doPre ) {
+     		    doPre.setProperty('focus', false);
+                map.data.revertStyle();
+     	    }
+     	    doPre = feature;
         } else {
             feature.setProperty('focus', false);
         }

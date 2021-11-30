@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>지도에서 글자클릭하면 색이 변하는 NAVER문구</title>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+    
+    <!-- naver map -->
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=xe0ahohhl3"></script>
+    
+    <style>
+        table,th,td {
+        border : 1px solid black;
+        border-collapse: collapse;
+        }
+        th,td {
+        padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+<div id="map" style="width:100%;height:400px;"></div>
+<script>
+var HOME_PATH = "https://navermaps.github.io/maps.js/docs",
+    urlPrefix = HOME_PATH +'/data/region',
+    urlSuffix = '.json',
+    regionGeoJson = [],
+    loadCount = 0;
+
+naver.maps.Event.once(map, 'init_stylemap', function () {
+    $.ajax({
+        url: HOME_PATH +'/data/naver.json',
+        dataType: 'json',
+        success: startDataLayer
+    });
+});
+
+//NAVER 글자 관련 함수
+function startDataLayer(geojson) {
+    map.data.addGeoJson(geojson);
+
+//기본설정
+    map.data.setStyle(function(feature) {
+        var color = 'red';
+
+        if (feature.getProperty('isColorful')) {
+            color = feature.getProperty('color');
+        }
+
+        return {
+            fillColor: color,
+            strokeColor: color,
+            strokeWeight: 2,
+            icon: null
+        };
+    });
+    
+//클릭하면 
+    map.data.addListener('click', function(e) {
+        e.feature.setProperty('isColorful', true);
+    });
+//더블클릭하면 확대
+    map.data.addListener('dblclick', function(e) {
+        var bounds = e.feature.getBounds();
+
+        if (bounds) {
+            map.panToBounds(bounds);
+        }
+    });
+//마우스올리면 pin_spot 이미지 변경
+    map.data.addListener('mouseover', function(e) {
+        map.data.overrideStyle(e.feature, {
+            strokeWeight: 8,
+            icon: HOME_PATH +'/img/example/pin_spot.png'
+        });
+    });
+//마우스내리면 원상복귀
+    map.data.addListener('mouseout', function(e) {
+        map.data.revertStyle();
+    });
+}
+
+// 지도가 로드된 다음에 일회성으로 실행되는 이벤트
+naver.maps.Event.once(map, 'init_stylemap', function () {
+    for (var i = 1; i < 18; i++) {
+        var keyword = i +'';
+
+        if (keyword.length === 1) {
+            keyword = '0'+ keyword;
+        }
+        // 01, 02, 03 생성
+
+        $.ajax({
+            url: urlPrefix + keyword + urlSuffix,
+            success: function(idx) {
+                return function(geojson) {
+                    regionGeoJson[idx] = geojson;
+
+                    loadCount++;
+                    // 17개 다 받아오면 그리기 시작
+                    if (loadCount === 17) {
+                        startDataLayer();
+                    }
+                }
+            }(i - 1)
+        });
+    }
+});
+
+var tooltip = $('<div style="position:absolute;z-index:1000;padding:5px 10px;background-color:#fff;border:solid 2px #000;font-size:14px;pointer-events:none;display:none;"></div>');
+tooltip.appendTo(map.getPanes().floatPane);
+
+
+function startDataLayer() {
+
+    map.data.setStyle(function(feature) {
+        
+        // 기본 라인 
+        var styleOptions = {
+            fillColor: '#ff0000',
+            fillOpacity: 0.0001,
+            strokeColor: '#ff0000',
+            strokeWeight: 2,
+            strokeOpacity: 0.4
+        };
+
+        // 클릭했을 때 스타일
+        if (feature.getProperty('focus')) {
+            styleOptions.fillOpacity = 0.6;
+            styleOptions.fillColor = '#0f0';
+            styleOptions.strokeColor = '#0f0';
+            styleOptions.strokeWeight = 4;
+            styleOptions.strokeOpacity = 1;
+        }
+
+        return styleOptions;
+    });
+
+    // 제가 받아온 Geojson파일을 map.data
+    regionGeoJson.forEach(function(geojson) {
+        map.data.addGeoJson(geojson);
+    });
+
+
+    var xhr = new XMLHttpRequest();
+    var url = 'http://apis.data.go.kr/1741000/DisasterMsg4/getDisasterMsg2List'; /*URL*/
+    var queryParams = '?' + encodeURIComponent('serviceKey') + '='+'lto9GMS%2FHcXqnhkB8s4ieS%2BA%2B8LBqOfr2n1RvKGWIDb2bCaS9H6zIZcQ2izG3sRqQ94CmRkrmBx%2B4bF2pCCr2A%3D%3D'; /*Service Key*/
+    queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /**/
+    queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10'); /**/
+    queryParams += '&' + encodeURIComponent('type') + '=' + encodeURIComponent('xml'); /**/
+    queryParams += '&' + encodeURIComponent('create_date') + '=' + encodeURIComponent('2021/06/22 00:00:00'); /**/
+    // queryParams += '&' + encodeURIComponent('location_name') + '=' + encodeURIComponent('제주특별자치도'); /**/
+    // xhr.open('GET', url + queryParams);
+    // xhr.onreadystatechange = function () {
+    //     if (this.readyState == 4) {
+    //         alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
+    //     }
+    // };
+    // xhr.send('');
+
+    var doPre = '' ; //이전에 클릭한 지역
+    map.data.addListener('click', function(e) {
+        var feature = e.feature;
+
+        // 여기서 다른 선택된 지역 있는지 지워줘야 됩니당
+        // 지워주는 방법은
+        // map.data._features 를 foreach 하면서 focus 끄시면 됩니다.
+    if (feature.getProperty('focus') !== true) {
+            // document.getElementById("table").innerHTML = feature.getProperty('area1');
+            queryParams += '&' + encodeURIComponent('location_name') + '=' + encodeURIComponent(feature.getProperty('area1')); /**/
+            xhr.open('GET', url + queryParams);
+            feature.setProperty('focus', true);
+            xhr.onreadystatechange = function () {
+                myFunction(this);
+            };
+            xhr.send('');
+            // 아래처럼 하는 방법은 도저히 모르겠다.. 
+            // map.data._features.forEach(
+            //     function(feature){
+            //         feature.setProperty('focus', false);
+            //     }
+            // );
+
+            // 이전에 선택한 지역이 있었으면 focus를 끈다.
+     	    if ( doPre ) {
+     		    doPre.setProperty('focus', false);
+                map.data.revertStyle();
+     	    }
+     	    doPre = feature;
+        } else {
+            feature.setProperty('focus', false);
+        }
+    });
+
+
+    map.data.addListener('mouseover', function(e) {
+        
+        // 이름을 받아
+        var feature = e.feature,
+            regionName = feature.getProperty('area1');
+            // 강원도
+
+        // 지역명 뜨는거 
+        tooltip.css({
+            display: '',
+            left: e.offset.x,
+            top: e.offset.y
+        }).text(regionName);
+
+        map.data.overrideStyle(feature, {
+            fillOpacity: 0.6,
+            strokeWeight: 4,
+            strokeOpacity: 1
+        });
+    });
+
+    map.data.addListener('mouseout', function(e) {
+        // 툴팁 사라지게 하고
+        tooltip.hide().empty();
+
+        // 스타일 원상복귀시키는
+        map.data.revertStyle();
+    });
+}
+    function myFunction(xml) {
+        var xmlDoc = xml.responseXML; //xml DOM 객체생성
+        var x = xmlDoc.getElementsByTagName("row");
+        let table="<tr><th>지역</th><th>메시지 내용</th></tr>";
+        for (let i = 0; i <x.length; i++) { 
+        table += "<tr><td>" +
+        x[i].getElementsByTagName("location_name")[0].childNodes[0].nodeValue +
+        "</td><td>" +
+        x[i].getElementsByTagName("msg")[0].childNodes[0].nodeValue +
+        "</td></tr>";
+        }
+        document.getElementById("table").innerHTML = table;
+    }
+
+</script>
+<table id ='table'></table>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>내 위치 중심 지도 위 클러스터화 되는 마커</title>
+    <!-- 기본틀 출처 - 네이버 Example -->
+    // https://github.com/navermaps/marker-tools.js
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+    
+    <!-- naver map -->
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=xe0ahohhl3"></script>
+
+    <script type="text/javascript" src="accidentdeath.js"></script>
+    <script type="text/javascript" src="MarkerClustering.js"></script>
+    <style>
+        table,th,td {
+        border : 1px solid black;
+        border-collapse: collapse;
+        }
+        th,td {
+        padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+<div id="map" style="width:100%;height:400px;"></div>
+<script>
+ var map = new naver.maps.Map("map", {
+        zoom: 6,
+        center: new naver.maps.LatLng(36.2253017, 127.6460516),
+        zoomControl: true,
+        zoomControlOptions: {
+            position: naver.maps.Position.TOP_LEFT,
+            style: naver.maps.ZoomControlStyle.SMALL
+        }
+    });
+
+    var markers = [],
+        data = accidentDeath.searchResult.accidentDeath;
+
+//지도에서 내 위치 출력
+var infowindow = new naver.maps.InfoWindow();
+
+function onSuccessGeolocation(position) {
+    var location = new naver.maps.LatLng(position.coords.latitude,
+                                         position.coords.longitude);
+
+    map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
+    map.setZoom(10); // 지도의 줌 레벨을 변경합니다.
+
+    infowindow.setContent('<div style="padding:20px;">' + '현재 내 위치' + '</div>');
+
+    infowindow.open(map, location);
+    console.log('Coordinates: ' + location.toString());
+}
+
+function onErrorGeolocation() {
+    var center = map.getCenter();
+
+    infowindow.setContent('<div style="padding:20px;">' +
+        '<h5 style="margin-bottom:5px;color:#f00;">Geolocation failed!</h5>'+ "latitude: "+ center.lat() +"<br />longitude: "+ center.lng() +'</div>');
+
+    infowindow.open(map, center);
+}
+
+$(window).on("load", function() {
+    if (navigator.geolocation) {
+        /**
+         * navigator.geolocation 은 Chrome 50 버젼 이후로 HTTP 환경에서 사용이 Deprecate 되어 HTTPS 환경에서만 사용 가능 합니다.
+         * http://localhost 에서는 사용이 가능하며, 테스트 목적으로, Chrome 의 바로가기를 만들어서 아래와 같이 설정하면 접속은 가능합니다.
+         * chrome.exe --unsafely-treat-insecure-origin-as-secure="http://example.com"
+         */
+        navigator.geolocation.getCurrentPosition(onSuccessGeolocation, onErrorGeolocation);
+    } else {
+        var center = map.getCenter();
+        infowindow.setContent('<div style="padding:20px;"><h5 style="margin-bottom:5px;color:#f00;">Geolocation not supported</h5></div>');
+        infowindow.open(map, center);
+    }
+});
+
+//지도 위에 클러스터화 된 마커
+    for (var i = 0, ii = data.length; i < ii; i++) {
+         var spot = data[i],
+            latlng = new naver.maps.LatLng(spot.grd_la, spot.grd_lo),
+            marker = new naver.maps.Marker({
+                position: latlng,
+                draggable: true
+            });
+
+        markers.push(marker);
+    }
+
+    var htmlMarker1 = {
+            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(images/cluster-marker-1.png);background-size:contain;"></div>',
+            size: N.Size(40, 40),
+            anchor: N.Point(20, 20)
+        },
+        htmlMarker2 = {
+            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(images/cluster-marker-2.png);background-size:contain;"></div>',
+            size: N.Size(40, 40),
+            anchor: N.Point(20, 20)
+        },
+        htmlMarker3 = {
+            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(images/cluster-marker-3.png);background-size:contain;"></div>',
+            size: N.Size(40, 40),
+            anchor: N.Point(20, 20)
+        },
+        htmlMarker4 = {
+            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(images/cluster-marker-4.png);background-size:contain;"></div>',
+            size: N.Size(40, 40),
+            anchor: N.Point(20, 20)
+        },
+        htmlMarker5 = {
+            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(images/cluster-marker-5.png);background-size:contain;"></div>',
+            size: N.Size(40, 40),
+            anchor: N.Point(20, 20)
+        };
+
+    var markerClustering = new MarkerClustering({
+        minClusterSize: 2,
+        maxZoom: 13,
+        map: map,
+        markers: markers,
+        disableClickZoom: false,
+        gridSize: 120,
+        icons: [htmlMarker1, htmlMarker2, htmlMarker3, htmlMarker4, htmlMarker5],
+        indexGenerator: function(count) {
+            var index = 0;
+
+            if (count >= 100 && count < 200) {
+                index = 1;
+            } else if (count >= 200 && count < 500) {
+                index = 2;
+            } else if (count >= 500 && count < 1000) {
+                index = 3;
+            } else if (count >= 1000) {
+                index = 4;
+            }
+
+            return index;
+        },
+        stylingFunction: function(clusterMarker, count) {
+            $(clusterMarker.getElement()).find('div:first-child').text(count);
+        }
+    });
+
+//클릭하면 밑에 표로 정보 표시
+   // 마커 클릭 이벤트 처리
+    // naver.maps.Event.addListener(marker, "click", function(e) {
+    //     let table="<tr><th>지역</th><th>메시지 내용</th></tr>";
+    //     for (let i = 0; i <x.length; i++) { 
+    //     table += "<tr><td>" +
+    //     x[i].getElementsByTagName("location_name")[0].childNodes[0].nodeValue +
+    //     "</td><td>" +
+    //     x[i].getElementsByTagName("msg")[0].childNodes[0].nodeValue +
+    //     "</td></tr>";
+    //     }
+    //     document.getElementById("table").innerHTML = table;
+    // });
+
+
+
+</script>
+<table id ='table'></table>
+</body>
+</html>

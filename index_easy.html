@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비온뒤맑음</title>
+    <style>
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            color: #001b3a; /* 원하는 색상으로 변경하세요 */
+        }
+
+        .right-align {
+            text-align: right;
+    </style>
+</head>
+<body>
+    <h1>실시간 침수 예측 도로 우회 경로 안내 서비스</h1>
+    <p class="right-align">NET챌린지 10기 비온뒤맑음</p>
+    <hr>
+    <form id="geocodeForm">
+        <label for="startLocation">출발지(도로명/건물명): </label>
+        <input type="text" id="startLocation" required>
+        <br>
+        <label for="endLocation">목적지(도로명/건물명): </label>
+        <input type="text" id="endLocation" required>
+        <br>
+        <input type="submit" value="입력하기">
+
+        <p><a href="navigation_map_test.html" target="_blank">우회경로 확인하기</a></p>
+
+    </form>
+    <script>
+        document.getElementById("geocodeForm").addEventListener("submit", function (e) {
+            e.preventDefault(); // 폼의 기본 동작 방지
+        });
+    </script>
+</body>
+</html>

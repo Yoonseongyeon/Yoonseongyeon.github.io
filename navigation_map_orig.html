@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_1509552c8cef4dd8bd161743c406b2f4 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_1509552c8cef4dd8bd161743c406b2f4" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_1509552c8cef4dd8bd161743c406b2f4 = L.map(
+                "map_1509552c8cef4dd8bd161743c406b2f4",
+                {
+                    center: [37.6141449, 127.0670545],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 11,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_64e82ef7c03d80ac4581ffe7c849e4e8 = L.tileLayer(
+                "http://mt0.google.com/vt/lyrs=m\u0026hl=ko\u0026x={x}\u0026y={y}\u0026z={z}",
+                {"attribution": "Google", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_1509552c8cef4dd8bd161743c406b2f4);
+        
+    
+            var marker_6ae5d691989cacf3eeb67e28c3cbdfb3 = L.marker(
+                [37.6141449, 127.0670545],
+                {}
+            ).addTo(map_1509552c8cef4dd8bd161743c406b2f4);
+        
+    
+            marker_6ae5d691989cacf3eeb67e28c3cbdfb3.bindTooltip(
+                `<div>
+                     출발지
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_09e86d453bb27ca793cbcd1ac5caca0c = L.marker(
+                [37.4791223, 127.0500938],
+                {}
+            ).addTo(map_1509552c8cef4dd8bd161743c406b2f4);
+        
+    
+            marker_09e86d453bb27ca793cbcd1ac5caca0c.bindTooltip(
+                `<div>
+                     도착지
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_97ecf3e30ec1ed0aaa644fefa5aff852 = L.circleMarker(
+                [37.5065, 127.13951],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_1509552c8cef4dd8bd161743c406b2f4);
+        
+    
+            circle_marker_97ecf3e30ec1ed0aaa644fefa5aff852.bindTooltip(
+                `<div>
+                     침수지역
+좌표: 37.5065, 127.13951
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_4da2d5b44ee925243c36efd7949f3f5f = L.circleMarker(
+                [37.5336607, 127.1407533],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_1509552c8cef4dd8bd161743c406b2f4);
+        
+    
+            circle_marker_4da2d5b44ee925243c36efd7949f3f5f.bindTooltip(
+                `<div>
+                     침수지역
+좌표: 37.5336607, 127.1407533
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_84529ad623a3db3deabd7e58a6a37610 = L.circleMarker(
+                [37.48579, 126.89631],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_1509552c8cef4dd8bd161743c406b2f4);
+        
+    
+            circle_marker_84529ad623a3db3deabd7e58a6a37610.bindTooltip(
+                `<div>
+                     침수지역
+좌표: 37.48579, 126.89631
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_a5d692c361224006eeddf4ab9ef59bf9 = L.circleMarker(
+                [37.62149, 127.05925],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_1509552c8cef4dd8bd161743c406b2f4);
+        
+    
+            circle_marker_a5d692c361224006eeddf4ab9ef59bf9.bindTooltip(
+                `<div>
+                     침수지역
+좌표: 37.62149, 127.05925
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_35742efb723789ab8a45f60041c6d773 = L.circleMarker(
+                [37.62229, 127.05952],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_1509552c8cef4dd8bd161743c406b2f4);
+        
+    
+            circle_marker_35742efb723789ab8a45f60041c6d773.bindTooltip(
+                `<div>
+                     침수지역
+좌표: 37.62229, 127.05952
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_05bad9c1d6f4146cd33588dda722c7da = L.circleMarker(
+                [37.5423, 127.10164],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_1509552c8cef4dd8bd161743c406b2f4);
+        
+    
+            circle_marker_05bad9c1d6f4146cd33588dda722c7da.bindTooltip(
+                `<div>
+                     침수지역
+좌표: 37.5423, 127.10164
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_cdf1f3ca32dfde388be08569c534c5e0 = L.circleMarker(
+                [37.4825935, 127.0790586],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_1509552c8cef4dd8bd161743c406b2f4);
+        
+    
+            circle_marker_cdf1f3ca32dfde388be08569c534c5e0.bindTooltip(
+                `<div>
+                     침수지역
+좌표: 37.4825935, 127.0790586
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_35f682463c4c9fda68ce42dcf2a14aee = L.circleMarker(
+                [37.4832797, 127.0838568],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_1509552c8cef4dd8bd161743c406b2f4);
+        
+    
+            circle_marker_35f682463c4c9fda68ce42dcf2a14aee.bindTooltip(
+                `<div>
+                     침수지역
+좌표: 37.4832797, 127.0838568
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_6e58dda0752897911d14d654cbfbb517 = L.circleMarker(
+                [37.4836874, 127.0866501],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_1509552c8cef4dd8bd161743c406b2f4);
+        
+    
+            circle_marker_6e58dda0752897911d14d654cbfbb517.bindTooltip(
+                `<div>
+                     침수지역
+좌표: 37.4836874, 127.0866501
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_820d4fd83032fd4c473160b34a0e4994 = L.circleMarker(
+                [37.5586685, 127.0930614],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_1509552c8cef4dd8bd161743c406b2f4);
+        
+    
+            circle_marker_820d4fd83032fd4c473160b34a0e4994.bindTooltip(
+                `<div>
+                     침수지역
+좌표: 37.5586685, 127.0930614
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_7e0cadd6fbe1b111d707d3c277dfb637 = L.polyline(
+                [[37.6141449, 127.0670545], [37.613874, 127.0666119], [37.6136064, 127.0658721], [37.6134306, 127.0659989], [37.613131, 127.066127], [37.6128846, 127.0662385], [37.6125728, 127.0659554], [37.6123521, 127.0658228], [37.612263, 127.0657693], [37.6119241, 127.0655764], [37.6117419, 127.0656442], [37.6113327, 127.0657965], [37.61112, 127.0658409], [37.61117, 127.06571], [37.610319, 127.0650419], [37.6101787, 127.064872], [37.6101238, 127.0647862], [37.6099564, 127.064577], [37.6097924, 127.0643092], [37.6097169, 127.064194], [37.60958, 127.06394], [37.6093951, 127.0635204], [37.6093342, 127.0633018], [37.6092978, 127.0632284], [37.6091865, 127.0630617], [37.6090264, 127.0628229], [37.6088542, 127.0626732], [37.6088382, 127.0625805], [37.6087815, 127.0622439], [37.608757, 127.0620965], [37.6087218, 127.0618842], [37.6086492, 127.0614477], [37.6084103, 127.0615185], [37.6083717, 127.061304], [37.6082644, 127.0613348], [37.6077448, 127.0614839], [37.6073901, 127.0615597], [37.6071176, 127.0616147], [37.6068448, 127.0616698], [37.6067793, 127.0612411], [37.6062895, 127.0616262], [37.6055468, 127.0619622], [37.6051342, 127.0620338], [37.6050239, 127.0620401], [37.6048581, 127.0620495], [37.6040572, 127.0620351], [37.6035954, 127.0620326], [37.6029799, 127.0620569], [37.6027512, 127.0620607], [37.6025472, 127.06207], [37.6016971, 127.0620575], [37.6008559, 127.0620358], [37.6002973, 127.0620043], [37.59902, 127.06174], [37.598277, 127.0613752], [37.5975013, 127.0609198], [37.597321, 127.0608114], [37.5964607, 127.0602482], [37.596025, 127.0599607], [37.5953829, 127.0595336], [37.5951782, 127.0593706], [37.5947753, 127.0591458], [37.5943878, 127.0588691], [37.5940038, 127.0586164], [37.5935822, 127.0583268], [37.5932665, 127.058122], [37.5927338, 127.0577535], [37.5919507, 127.0572509], [37.5913753, 127.0568599], [37.5911886, 127.0567259], [37.5910104, 127.0565953], [37.590058, 127.0559106], [37.5897971, 127.0555421], [37.5893691, 127.0549836], [37.5889013, 127.0544039], [37.5887102, 127.0541487], [37.5883693, 127.0538068], [37.5882804, 127.0537215], [37.5882202, 127.0536604], [37.5878122, 127.0532456], [37.5867592, 127.0523847], [37.5865731, 127.0522383], [37.5863878, 127.0520919], [37.5860617, 127.0518183], [37.5859298, 127.051707], [37.5856297, 127.0514595], [37.5854148, 127.0512884], [37.5851566, 127.0510829], [37.58449, 127.05052], [37.58378, 127.04979], [37.5836669, 127.0496481], [37.5831204, 127.048963], [37.5828227, 127.0485909], [37.5824194, 127.0480763], [37.5815062, 127.046925], [37.5812788, 127.0466701], [37.5810963, 127.0463886], [37.5805909, 127.045719], [37.5801631, 127.0449914], [37.580119, 127.0448362], [37.5799509, 127.0442898], [37.5797042, 127.0435033], [37.5793387, 127.0423761], [37.5790062, 127.0412674], [37.5782433, 127.0383606], [37.5781279, 127.0383515], [37.5777122, 127.0382918], [37.5775767, 127.0382702], [37.5767107, 127.0382147], [37.5759452, 127.0381678], [37.575405, 127.0381518], [37.5749256, 127.0381332], [37.574752, 127.0381211], [37.5745152, 127.0381099], [37.5741323, 127.0380917], [37.5740043, 127.0380828], [37.5736207, 127.038049], [37.5731342, 127.0380062], [37.5727269, 127.0379653], [37.5725278, 127.0379493], [37.5717874, 127.0379259], [37.5713947, 127.0378987], [37.5709985, 127.0378601], [37.5708148, 127.0378126], [37.570127, 127.0376077], [37.5692943, 127.0373836], [37.5688453, 127.0372658], [37.5686871, 127.0372225], [37.5680915, 127.0370597], [37.5677751, 127.0369732], [37.5676837, 127.0369469], [37.5675786, 127.0369163], [37.5672836, 127.0368305], [37.5666985, 127.0366611], [37.5665377, 127.0366205], [37.5663723, 127.0365745], [37.5660432, 127.0365179], [37.5658002, 127.036395], [37.5655148, 127.0363649], [37.5647044, 127.0362588], [37.5638772, 127.0361343], [37.5628396, 127.0360262], [37.5596874, 127.0339099], [37.5595759, 127.0338827], [37.5585272, 127.0339937], [37.5577336, 127.0340571], [37.5573607, 127.0340889], [37.5558176, 127.0342558], [37.555528, 127.0342893], [37.5551101, 127.034327], [37.5545755, 127.0343753], [37.5540856, 127.0345258], [37.5539254, 127.0345823], [37.5473727, 127.0364883], [37.5472643, 127.0365156], [37.546596, 127.0365464], [37.5447994, 127.0362628], [37.5440314, 127.0361421], [37.5439495, 127.0361144], [37.5433869, 127.035999], [37.5390859, 127.0352758], [37.5356381, 127.0347041], [37.5325912, 127.0342054], [37.5304377, 127.0338996], [37.5292382, 127.0336934], [37.5291136, 127.0336773], [37.5284325, 127.0335808], [37.5275682, 127.0334674], [37.5263725, 127.0333241], [37.5258692, 127.0332536], [37.5243755, 127.0330618], [37.5229919, 127.0331998], [37.5223554, 127.0334082], [37.5219425, 127.033576], [37.5215725, 127.0337263], [37.5214392, 127.0337787], [37.5209831, 127.0339862], [37.5207336, 127.0340997], [37.5201906, 127.0343467], [37.5196029, 127.0346038], [37.5188465, 127.0349318], [37.5181849, 127.0352178], [37.5170797, 127.0353171], [37.5164805, 127.0353241], [37.5154754, 127.0352884], [37.5152955, 127.0352937], [37.5149557, 127.0352916], [37.5145819, 127.0352875], [37.5132234, 127.035328], [37.5129425, 127.0353721], [37.5117996, 127.0357151], [37.5107443, 127.0364153], [37.5104493, 127.0366672], [37.5096433, 127.0374525], [37.508984, 127.0380822], [37.5086767, 127.0383739], [37.5077448, 127.0393019], [37.5069441, 127.0401037], [37.5061572, 127.0408521], [37.5052533, 127.0414555], [37.5041229, 127.0418812], [37.502668, 127.0425089], [37.5024458, 127.0426326], [37.5013386, 127.0432271], [37.4995876, 127.0441284], [37.4992019, 127.0443087], [37.4984922, 127.044627], [37.4978117, 127.044927], [37.4967727, 127.0454315], [37.4967376, 127.0454445], [37.4961285, 127.0457546], [37.4955363, 127.0460219], [37.4941628, 127.0466199], [37.4936013, 127.0469131], [37.4888364, 127.0494971], [37.4884259, 127.0497298], [37.488309, 127.0497921], [37.4879089, 127.0499997], [37.4868868, 127.0505585], [37.4865799, 127.0507236], [37.481054, 127.0537081], [37.4806319, 127.0530012], [37.4794413, 127.0509007], [37.4793483, 127.0507189], [37.4791223, 127.0500938]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1, "smoothFactor": 1.0, "stroke": true, "weight": 5}
+            ).addTo(map_1509552c8cef4dd8bd161743c406b2f4);
+        
+</script>
+</html>
